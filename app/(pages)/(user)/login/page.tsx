@@ -26,11 +26,14 @@ export default function LoginPage() {
             })
         })
         if(response.status === 200) {
-            const data = await response.json();
-            setUser({
-                uid: data.uid,
-                email: data.email
-            })
+            const token = await response.json();
+            const lr = await fetch("/api/getUser")
+            if(lr.status !== 200) {
+                alert("Error")
+                return;
+            }
+            const data = await lr.json();
+            setUser(data);
             redirect("/home")
         } else {
             const data = await response.json();
