@@ -7,13 +7,19 @@ export default function Home() {
   
   const {user, setUser} : any = useContext(UserContext);
 
-  useEffect(() => {
-    if(Object.keys(user).length === 0) {
-      redirect("/login")
-    } else {
-      redirect("/home")
+  const getUserDetails = async () => {
+        const response = await fetch("/api/getUser");
+        if(response.status !== 200) {
+            redirect("/login")
+        }
+        const data = await response.json();
+        setUser(data)
+        redirect("/home")
     }
-  }, [])
+
+    useEffect(() => {
+        getUserDetails();
+    }, [])
 
   return (
     <div className="bg-sky-50 w-screen h-screen flex flex-row justify-center items-center text-2xl text-center">
