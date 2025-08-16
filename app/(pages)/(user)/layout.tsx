@@ -1,17 +1,11 @@
 "use client"
-import { UserContext } from "@/app/contexts/UserContext";
-import { useContext } from "react";
+import UserNavBar from "./userComponents/UserNavbar";
 
 export default function UserLayout({children} : Readonly<{children: React.ReactNode;}>) {
-    
-    const {user} : any = useContext(UserContext)
-
-    console.log(user)
 
     return (
         <div>
-            User layout 
-            <p>User: {user?.email ?? "No user yet!"}</p> 
+            <UserNavBar /> 
             {children}
         </div>
     )

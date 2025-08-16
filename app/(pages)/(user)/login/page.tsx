@@ -1,17 +1,41 @@
 "use client"
 import { UserContext } from "@/app/contexts/UserContext"
+import { redirect } from "next/navigation";
 import { useContext, useEffect } from "react"
 
 export default function LoginPage() {
     
     const {user, setUser} : any = useContext(UserContext);
 
-    const loginHandler = (event: any) => {
+    const loginHandler = async (event: any) => {
         event.preventDefault()
-        setUser({
-            email: event.target[0].value,
-            password: event.target[1].value
+        const email = event.target[0].value;
+        const password = event.target[1].value;
+        if(email === "" || password === "") {
+            alert("Please enter correct credentials")
+            return;
+        }
+        const response = await fetch("/api/login", {
+            method: "POST",
+            headers: {
+                "Content-type" : "application/json"
+            },
+            body: JSON.stringify({
+                email: event.target[0].value,
+                password: event.target[1].value    
+            })
         })
+        if(response.status === 200) {
+            const data = await response.json();
+            setUser({
+                uid: data.uid,
+                email: data.email
+            })
+            redirect("/home")
+        } else {
+            const data = await response.json();
+            alert("Login failed: " + data.error)
+        }
     }
 
     useEffect(() => {
@@ -19,12 +43,12 @@ export default function LoginPage() {
     },[])
 
     return (
-        <div>
-            Login Page
+        <div className="h-[92vh] bg-slate-50 flex justify-center items-center">
             <form onSubmit={loginHandler}>
-                <input type="email" placeholder="email"/><br/>
-                <input type="password" placeholder="*******"/><br/>
-                <input type="submit" placeholder="Submit"/><br/>
+                <input type="email" placeholder="email" className="p-2 m-1 border-2 border-blue-700 rounded-md"/><br/>
+                <input type="password" placeholder="*******" className="p-2 m-1 border-2 border-blue-700 rounded-md"/><br/>
+                <input type="submit" placeholder="Submit" className="p-2 m-1 bg-blue-400 rounded-md shadow-md
+                transition-all hover:shadow-none"/><br/>
             </form>
         </div>
     )
