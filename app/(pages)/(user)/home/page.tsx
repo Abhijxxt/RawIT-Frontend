@@ -2,6 +2,7 @@
 
 import { UserContext } from "@/app/contexts/UserContext"
 import { useContext, useEffect } from "react"
+import { redirect } from "next/navigation";
 
 export default function HomePage() {
     
@@ -11,7 +12,7 @@ export default function HomePage() {
         const response = await fetch("/api/getUser");
         if(response.status !== 200) {
             alert("Login failed")
-            return;
+            redirect("/login")
         }
         const data = await response.json();
         setUser(data)
@@ -23,7 +24,7 @@ export default function HomePage() {
 
     return (
         <div>
-            HomePage {user.uid} {user.email}
+            HomePage {user.first_name} {user.last_name}
         </div>
     )
 }

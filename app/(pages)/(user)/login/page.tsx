@@ -26,14 +26,14 @@ export default function LoginPage() {
             })
         })
         if(response.status === 200) {
-            const token = await response.json();
-            const lr = await fetch("/api/getUser")
-            if(lr.status !== 200) {
-                alert("Error")
-                return;
-            }
-            const data = await lr.json();
-            setUser(data);
+            // const token = await response.json();
+            // const lr = await fetch("/api/getUser")
+            // if(lr.status !== 200) {
+            //     alert("Error")
+            //     return;
+            // }
+            // const data = await lr.json();
+            // setUser(data);
             redirect("/home")
         } else {
             const data = await response.json();

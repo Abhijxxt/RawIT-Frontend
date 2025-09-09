@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({error: "Wrong password"}, {status: 400});
         } else {
         
-            const token = jwt.sign({uid: 1, email: email}, SECRET_KEY, { expiresIn: '1h' })
+            const token = jwt.sign(validateUser, SECRET_KEY, { expiresIn: '1h' })
 
             const response = NextResponse.json({token}, {status: 200})
             response.cookies.set({

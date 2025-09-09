@@ -15,7 +15,7 @@ export default function UserNavBar() {
                 LINKS
             </div>
             <div>
-                {user?.email ?? "No user"}
+                {user?.first_name ?? "No user"}
             </div>
         </div>
     )
