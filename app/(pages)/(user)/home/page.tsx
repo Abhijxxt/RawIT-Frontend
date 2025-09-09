@@ -3,6 +3,7 @@
 import { UserContext } from "@/app/contexts/UserContext"
 import { useContext, useEffect } from "react"
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export default function HomePage() {
     
@@ -24,7 +25,8 @@ export default function HomePage() {
 
     return (
         <div>
-            HomePage {user.first_name} {user.last_name}
+            <h1>Welcome {user.first_name} {user.last_name}</h1> 
+            <Link href={"/user-issue"}>Create an Issue</Link>
         </div>
     )
 }
