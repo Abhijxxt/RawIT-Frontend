@@ -1,37 +1,45 @@
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-const EMAIL = "abhijeetchatterjee2004@gmail.com";
-const PASSWORD = "Abhijeet@10";
-const hashpassword = await bcrypt.hash(PASSWORD, 10);
+import { prisma } from "@/prisma/client";
 
 export async function POST(request: NextRequest) {
     const { email, password } = await request.json();
     
     const SECRET_KEY = process.env.JWT_SECRET_KEY || "secretKey";
 
-
-    if(email === EMAIL) {
-        const validatePassword = await bcrypt.compare(password, hashpassword);
-        if(!validatePassword){
-            return NextResponse.json({error: "Wrong password"}, {status: 404});
+    const validateUser = await prisma.user.findUnique({
+        where: {
+            email: email,
         }
-
-        const token = jwt.sign({uid: 1, email: email}, SECRET_KEY, { expiresIn: '1h' })
-
-        const response = NextResponse.json({token}, {status: 200})
-        response.cookies.set({
-            name: "token",
-            value: token,
-            httpOnly: true, // secure cookie, not accessible via JS
-            path: "/",      // cookie available on all routes
-            maxAge: 60 * 60 // 1 hour in seconds
-        });
-
-        return response;
-
+    })
+    console.log(validateUser);
+    if(!validateUser) {
+        return NextResponse.json({error: "No user found"}, {status: 404})
     } else {
-        return NextResponse.json({error: "Email not found"}, {status: 404});
+        console.log(validateUser);
+        // const hashpassword = await bcrypt.hash(password, 10);
+        console.log(validateUser.password);
+        const validatePassword = await bcrypt.compare(password, validateUser.password);
+        if(!validatePassword) {
+            return NextResponse.json({error: "Wrong password"}, {status: 400});
+        } else {
+        
+            const token = jwt.sign({uid: 1, email: email}, SECRET_KEY, { expiresIn: '1h' })
+
+            const response = NextResponse.json({token}, {status: 200})
+            response.cookies.set({
+                name: "token",
+                value: token,
+                httpOnly: true, // secure cookie, not accessible via JS
+                path: "/",      // cookie available on all routes
+                maxAge: 60 * 60 // 1 hour in seconds
+            });
+
+            return response;
+    
+        
+        }
     }
 
 }
