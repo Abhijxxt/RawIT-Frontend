@@ -25,8 +25,16 @@ export default function HomePage() {
 
     return (
         <div>
-            <h1>Welcome {user.first_name} {user.last_name}</h1> 
-            <Link href={"/user-issue"}>Create an Issue</Link>
+            <div className="w-screen h-100 bg-slate-100 p-4 ">
+                <div className="w-[50%] h-full flex flex-col justify-between">
+                    <h1 className="text-2xl font-bold pt-4 pb-4">Welcome, {user.first_name} {user.last_name}</h1> 
+                    <div>
+                        <p>Start exploring</p>
+                        <p>Where the world ends, we begin</p>
+                    </div>
+                    <Link href={"/products"}><button className="bg-orange-400 p-2 px-4 rounded-md shadow-md w-[40%]">Let's go</button></Link>
+                </div>
+            </div>
         </div>
     )
 }
