@@ -10,13 +10,13 @@ export default function UserNavBar() {
     const {user} : any = useContext(UserContext)
 
     return(
-        <div className="flex flex-row h-16 justify-around items-center bg-teal-600">
+        <div className="flex flex-row h-16 justify-around items-center bg-amber-600">
             <div>
-                RawIT
+                <h1 className="text-2xl font-bold">RawIT</h1>
             </div>
-            <div className="flex flex-row items-center">
-                <input type="text" placeholder="Search products..." className="rounded-md p-1 bg-slate-100"/>
-                <button className="p-1.5 bg-orange-400 rounded-md text-xl"><FaSearch /></button>
+            <div className="flex flex-row items-center rounded-md">
+                <input type="text" placeholder="Search products..." className="rounded-l-md text-black outline-none p-1 px-2 bg-slate-100"/>
+                <button className="p-1.5 bg-slate-700 rounded-r-md text-xl"><FaSearch /></button>
             </div>
             <div className="flex flex-row gap-4">
                 <div>
@@ -24,7 +24,7 @@ export default function UserNavBar() {
                     <Link href={"/"}>Account</Link>
                 </div>
                 <p> | {user?.first_name ?? <Link href={"/login"}>Login</Link>}</p>
-                <Link href={"/"}><BsCart2 className="text-2xl"/></Link>
+                {user?.first_name && <Link href={"/"}><BsCart2 className="text-2xl"/></Link>}
             </div>
         </div>
     )

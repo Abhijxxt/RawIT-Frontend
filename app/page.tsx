@@ -22,7 +22,7 @@ export default function Home() {
     }, [])
 
   return (
-    <div className="bg-sky-50 w-screen h-screen flex flex-row justify-center items-center text-2xl text-center">
+    <div className="bg-sky-50 text-black w-screen h-screen flex flex-row justify-center items-center text-2xl text-center">
       Please wait while we are setting things up for you!
     </div>
   );

@@ -49,8 +49,8 @@ export default function LoginPage() {
     return (
         <div className="h-[92vh] bg-slate-50 flex justify-center items-center">
             <form onSubmit={loginHandler}>
-                <input type="email" placeholder="email" className="p-2 m-1 border-2 border-blue-700 rounded-md"/><br/>
-                <input type="password" placeholder="*******" className="p-2 m-1 border-2 border-blue-700 rounded-md"/><br/>
+                <input type="email" placeholder="email" className="p-2 m-1 text-black border-2 border-blue-700 rounded-md"/><br/>
+                <input type="password" placeholder="*******" className="p-2 m-1 text-black border-2 border-blue-700 rounded-md"/><br/>
                 <input type="submit" placeholder="Submit" className="p-2 m-1 bg-blue-400 rounded-md shadow-md
                 transition-all hover:shadow-none"/><br/>
                 <Link href={"/signup"} className="m-2 text-blue-600 underline">Create account</Link>

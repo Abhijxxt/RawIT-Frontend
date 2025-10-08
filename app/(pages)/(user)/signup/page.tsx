@@ -36,7 +36,7 @@ export default function SignupPage() {
     
     return (
         <div className="h-[92vh] bg-slate-50 flex justify-center items-center">
-            <form onSubmit={signupHandler}>
+            <form onSubmit={signupHandler} className="text-black">
                 <input type="text" placeholder="First Name" className="p-2 m-1 border-2 border-blue-700 rounded-md" />
                 <input type="text" placeholder="Middle Name" className="p-2 m-1 border-2 border-blue-700 rounded-md" />
                 <input type="text" placeholder="Last Name" className="p-2 m-1 border-2 border-blue-700 rounded-md" /> <br/>

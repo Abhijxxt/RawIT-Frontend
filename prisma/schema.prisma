@@ -46,3 +46,49 @@ model issues {
   person_id Int @db.Int
   category String @db.VarChar(10)
 }
+
+model products {
+  pid Int @id @default(autoincrement())
+  name String @db.VarChar(100)
+  manufacturer String @db.VarChar(200)
+  image_url String @db.VarChar(300)
+  description String @db.VarChar(1000)
+  price Float @db.Float
+  stock Int @default(0)
+  vid Int @db.Int 
+  category String @db.VarChar(50) @default("Unknown")
+  clicks Int @db.Int @default(0)
+}
+
+model vendor {
+  vid Int @id @default(autoincrement())
+  name String @db.VarChar(100)
+  phone String @db.VarChar(15)
+  address String @db.VarChar(300)
+  email String @db.VarChar(50)
+  password String @db.VarChar(50)
+}
+
+model admin {
+  aid Int @id @default(autoincrement())
+  name String @db.VarChar(100)
+  email String @db.VarChar(50)
+  password String @db.VarChar(50)
+}
+
+model transaction {
+  tid Int @id @default(autoincrement())
+  amount Float @db.Float 
+  pid Int @db.Int
+  uid Int @db.Int
+  vid Int @db.Int
+  dateOfTransaction DateTime @default(now()) @db.Timestamp(6)
+  statusOfTransaction String @db.VarChar(20) @default("Success")
+}
+
+model cart {
+  cid Int @id @default(autoincrement())
+  uid Int @db.Int
+  pid Int @db.Int
+  price Float @db.Float
+}
