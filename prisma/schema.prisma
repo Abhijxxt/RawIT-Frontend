@@ -92,3 +92,9 @@ model cart {
   pid Int @db.Int
   price Float @db.Float
 }
+
+model UsersPerMonth {
+  upmid Int @id @default (autoincrement())
+  month String @db.VarChar(12)
+  users Int @db.Int
+}
