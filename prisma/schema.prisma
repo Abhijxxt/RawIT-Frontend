@@ -94,7 +94,6 @@ model cart {
 }
 
 model UsersPerMonth {
-  upmid Int @id @default (autoincrement())
-  month String @db.VarChar(12)
-  users Int @db.Int
+  month String @db.VarChar(12) @id
+  users_created Int @db.Int
 }
